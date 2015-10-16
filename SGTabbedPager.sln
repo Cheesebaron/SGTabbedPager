@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGTabbedPager", "SGTabbedPager\SGTabbedPager.csproj", "{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGTabbedPagerMvx", "SGTabbedPagerMvx\SGTabbedPagerMvx.csproj", "{78B8B77D-BF64-4E01-A266-ECA287103852}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{FB840E6C-F4A9-4688-9A2E-B6005030DB21}"
+	ProjectSection(SolutionItems) = preProject
+		SGTabbedPager.nuspec = SGTabbedPager.nuspec
+		SGTabbedPagerMvx.nuspec = SGTabbedPagerMvx.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B8B77D-BF64-4E01-A266-ECA287103852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B8B77D-BF64-4E01-A266-ECA287103852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B8B77D-BF64-4E01-A266-ECA287103852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B8B77D-BF64-4E01-A266-ECA287103852}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
