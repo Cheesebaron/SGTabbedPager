@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre1</version>
+    <version>0.0.1-pre2</version>
     <title>SGTabbedPager</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -21,8 +21,8 @@
   </metadata>
   <files>   
     <!-- touch -->
-    <file src="SGTabbedPagerMvx\bin\iPhone\Release\SGTabbedPagerMvx.*" target="lib\Xamarin.iOS10" />
+    <file src="..\SGTabbedPagerMvx\bin\iPhone\Release\SGTabbedPagerMvx.*" target="lib\Xamarin.iOS10" />
 
-    <file src="SGTabbedPager\**\*.cs" target="src\SGTabbedPagerMvx" />
+    <file src="..\SGTabbedPager\**\*.cs" target="src\SGTabbedPagerMvx" />
   </files>
 </package>
