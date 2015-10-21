@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
-    <id>SGTabbedPager</id>
-    <version>0.0.1</version>
+    <id>SGTabbedPagerMvx</id>
+    <version>0.0.1-pre1</version>
     <title>SGTabbedPager</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
     <licenseUrl>https://github.com/Cheesebaron/SGTabbedPager/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Cheesebaron/SGTabbedPager</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Tabbed Pager for iOS</description>
+    <description>Tabbed Pager for iOS (MvvmCross)</description>
     <tags>xamarin monotouch ios</tags>
     <dependencies>
       <group targetFramework ="Xamarin.iOS">
         <dependency id="Cirrious.FluentLayout" version="2.0.0" />
+		    <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
       </group>
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
   </metadata>
   <files>   
     <!-- touch -->
-    <file src="SGTabbedPager\bin\iPhone\Release\SGTabbedPager.*" target="lib\Xamarin.iOS10" />
+    <file src="SGTabbedPagerMvx\bin\iPhone\Release\SGTabbedPagerMvx.*" target="lib\Xamarin.iOS10" />
 
-    <file src="SGTabbedPager\**\*.cs" target="src\SGTabbedPager" />
+    <file src="SGTabbedPager\**\*.cs" target="src\SGTabbedPagerMvx" />
   </files>
 </package>
