@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre2</version>
+    <version>0.0.1-pre4</version>
     <title>SGTabbedPager</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -18,6 +18,12 @@
       </group>
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
+    <releaseNotes>
+      0.0.1-pre4
+      Fixed crash on rotate
+      0.0.1-pre3
+      MvxSGTabbedPager was not included in previous builds
+    </releaseNotes>
   </metadata>
   <files>   
     <!-- touch -->

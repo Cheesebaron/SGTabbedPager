@@ -17,6 +17,12 @@
       </group>
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
+    <releaseNotes>
+      0.0.3
+      Fixed crash on rotate
+      0.0.2
+      MvxSGTabbedPager was not included in previous builds
+    </releaseNotes>
   </metadata>
   <files>   
     <!-- touch -->

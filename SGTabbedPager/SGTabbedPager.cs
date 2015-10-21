@@ -119,7 +119,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         {
             TitleScrollView.Delegate = null;
             ContentScrollView.Delegate = null;
-            coordinator.AnimateAlongsideTransition(null, context => {
+            coordinator.AnimateAlongsideTransition(context => {}, context => {
                 TitleScrollView.Delegate = this;
                 ContentScrollView.Delegate = this;
                 SwitchPage(_selectedIndex, false);
