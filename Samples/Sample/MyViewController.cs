@@ -31,6 +31,9 @@ namespace Sample
 
             Datasource = this;
             TabColor = UIColorHelpers.GetRandomColor();
+            HeaderFont = UIFont.BoldSystemFontOfSize(25);
+            HeaderColor = UIColor.DarkGray;
+            BottomLineColor = UIColor.White;
             Title = "SGTabbedPager Sample";
         }
 

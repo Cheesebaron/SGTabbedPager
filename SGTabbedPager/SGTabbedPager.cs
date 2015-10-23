@@ -32,6 +32,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private int _selectedIndex;
         private bool _enableParallax = true;
         private UIColor _tabColor;
+        private UIColor _bottomLineColor;
 
         public UIViewController SelectedViewController => _viewControllers[_selectedIndex];
 
@@ -40,13 +41,26 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             get { return _tabColor; }
             set
             {
-                _tabColor = value;
-                if (_bottomLine != null)
-                    _bottomLine.BackgroundColor = _tabColor;
+                _tabColor = value;                
                 if (_tabIndicator != null)
                     _tabIndicator.BackgroundColor = _tabColor;
             }
         }
+
+        public UIFont HeaderFont { get; set; }
+
+        public UIColor BottomLineColor
+        {
+            get { return _bottomLineColor; }
+            set
+            {
+                _bottomLineColor = value;
+                if (_bottomLine != null)
+                    _bottomLine.BackgroundColor = _bottomLineColor;
+            }
+        }
+
+        public UIColor HeaderColor { get; set; }        
 
         public ISGTabbedPagerDatasource Datasource { get; set; }
         public ISGTabbedPagerDelegate Delegate { get; set; }
@@ -184,12 +198,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
             _tabButtons.Clear();
 
-            var font = UIFont.FromName("HelveticaNeue-Thin", 20);
+            var font = HeaderFont ?? UIFont.FromName("HelveticaNeue-Thin", 20);
+            var headerColor = HeaderColor ?? UIColor.Black;
+            
             for (var i = 0; i < _viewControllerCount; i++)
-            {
+            {                
                 var button = UIButton.FromType(UIButtonType.Custom);
                 button.SetTitle(Datasource?.GetViewControllerTitle(i), UIControlState.Normal);
-                button.SetTitleColor(UIColor.Black, UIControlState.Normal);
+                button.SetTitleColor(headerColor, UIControlState.Normal);
                 if (button.TitleLabel != null)
                 {
                     button.TitleLabel.Font = font;
