@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre4</version>
-    <title>SGTabbedPager</title>
+    <version>0.0.1-pre5</version>
+    <title>SGTabbedPager (MvvmCross)</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
     <licenseUrl>https://github.com/Cheesebaron/SGTabbedPager/blob/master/LICENSE</licenseUrl>
@@ -19,6 +19,8 @@
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
     <releaseNotes>
+      0.0.1-pre5
+      Added ability to change color of bottom line and tab indicator independently. Also added ability to change the font of the Tab items. Thanks Erlend!
       0.0.1-pre4
       Fixed crash on rotate
       0.0.1-pre3
