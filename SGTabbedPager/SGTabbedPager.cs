@@ -131,15 +131,24 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         public override void WillTransitionToTraitCollection(UITraitCollection traitCollection,
             IUIViewControllerTransitionCoordinator coordinator)
         {
-            TitleScrollView.Delegate = null;
-            ContentScrollView.Delegate = null;
-            coordinator.AnimateAlongsideTransition(context => {}, context => {
-                TitleScrollView.Delegate = this;
-                ContentScrollView.Delegate = this;
+            if (TitleScrollView != null)
+                TitleScrollView.Delegate = null;
+            if (ContentScrollView != null)
+                ContentScrollView.Delegate = null;
+
+            coordinator?.AnimateAlongsideTransition(context => {}, context => {
+                if (TitleScrollView != null)
+                    TitleScrollView.Delegate = this;
+                if (ContentScrollView != null)
+                    ContentScrollView.Delegate = this;
                 SwitchPage(_selectedIndex, false);
             });
         }
 
+        /// <summary>
+        /// Reload data. Use this if you add or remove <see cref="UIViewController"/> instances from the <see cref="ISGTabbedPagerDatasource"/>.
+        /// </summary>
+        /// <exception cref="NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1" /> is read-only (should actually never happen).</exception>
         public void ReloadData()
         {
             foreach (var viewController in _viewControllers)
