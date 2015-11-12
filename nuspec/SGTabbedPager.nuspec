@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPager</id>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <title>SGTabbedPager</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -18,12 +18,16 @@
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
     <releaseNotes>
-      0.0.4
-      Added ability to change color of bottom line and tab indicator independently. Also added ability to change the font of the Tab items. Thanks Erlend!
-      0.0.3
-      Fixed crash on rotate
-      0.0.2
-      MvxSGTabbedPager was not included in previous builds
+0.0.5
+Added event equivalent of the delegate
+Guard against potential NPE when rotating screen
+Added some XML docs
+0.0.4
+Added ability to change color of bottom line and tab indicator independently. Also added ability to change the font of the Tab items. Thanks Erlend!
+0.0.3
+Fixed crash on rotate
+0.0.2
+MvxSGTabbedPager was not included in previous builds
     </releaseNotes>
   </metadata>
   <files>   

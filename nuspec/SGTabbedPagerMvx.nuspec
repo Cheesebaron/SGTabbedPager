@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre5</version>
+    <version>0.0.1-pre6</version>
     <title>SGTabbedPager (MvvmCross)</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -14,17 +14,23 @@
     <dependencies>
       <group targetFramework ="Xamarin.iOS">
         <dependency id="Cirrious.FluentLayout" version="2.0.0" />
-		    <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta4" />
+		    <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
+        <dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta5" />
       </group>
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
     <releaseNotes>
-      0.0.1-pre5
-      Added ability to change color of bottom line and tab indicator independently. Also added ability to change the font of the Tab items. Thanks Erlend!
-      0.0.1-pre4
-      Fixed crash on rotate
-      0.0.1-pre3
-      MvxSGTabbedPager was not included in previous builds
+0.0.1-pre6
+Added event equivalent of the delegate
+Guard against potential NPE when rotating screen
+Added some XML docs
+Built against latest MvvmCross 4.0.0-beta5
+0.0.1-pre5
+Added ability to change color of bottom line and tab indicator independently. Also added ability to change the font of the Tab items. Thanks Erlend!
+0.0.1-pre4
+Fixed crash on rotate
+0.0.1-pre3
+MvxSGTabbedPager was not included in previous builds
     </releaseNotes>
   </metadata>
   <files>   
