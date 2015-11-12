@@ -34,8 +34,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIColor _tabColor;
         private UIColor _bottomLineColor;
 
+        /// <summary>
+        /// Currently selected <see cref="UIViewController"/>.
+        /// </summary>
         public UIViewController SelectedViewController => _viewControllers[_selectedIndex];
 
+        /// <summary>
+        /// <see cref="UIColor"/> used for the background color of the Tab Indicator.
+        /// </summary>
         public UIColor TabColor
         {
             get { return _tabColor; }
@@ -47,8 +53,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             }
         }
 
+        /// <summary>
+        /// <see cref="UIFont"/> used for the Tab Items.
+        /// </summary>
         public UIFont HeaderFont { get; set; }
 
+        /// <summary>
+        /// <see cref="UIColor"/> of the line of the bottom of the Tab Indicator.
+        /// </summary>
         public UIColor BottomLineColor
         {
             get { return _bottomLineColor; }
@@ -60,10 +72,25 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             }
         }
 
-        public UIColor HeaderColor { get; set; }        
+        /// <summary>
+        /// <see cref="UIColor"/> of the title on each Tab Item.
+        /// </summary>
+        public UIColor HeaderColor { get; set; }
 
+        /// <summary>
+        /// The <see cref="ISGTabbedPagerDatasource"/> describing which <see cref="UIViewController"/> to present.
+        /// </summary>
         public ISGTabbedPagerDatasource Datasource { get; set; }
+
+        /// <summary>
+        /// An <see cref="ISGTabbedPagerDelegate"/> used to call back when the <see cref="UIViewController"/> is changed.
+        /// </summary>
         public ISGTabbedPagerDelegate Delegate { get; set; }
+
+        /// <summary>
+        /// Event invoked when <see cref="UIViewController"/> is changed.
+        /// </summary>
+        public event EventHandler<int> OnShowViewController;
 
         public override void EncodeRestorableState(NSCoder coder)
         {
@@ -159,45 +186,47 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             }
             _viewControllers.Clear();
 
-            if (Datasource != null)
+            if (Datasource == null) return;
+
+            _viewControllerCount = Datasource.NumberOfViewControllers;
+            for (var i = 0; i < _viewControllerCount; i++)
             {
-                _viewControllerCount = Datasource.NumberOfViewControllers;
-                for (var i = 0; i < _viewControllerCount; i++)
-                {
-                    var viewController = Datasource.GetViewController(i);
+                var viewController = Datasource.GetViewController(i);
 
-                    AddChildViewController(viewController);
-                    var size = ContentScrollView.Frame.Size;
-                    viewController.View.Frame = new CGRect(size.Width * i, 0, size.Width, size.Height);
-                    ContentScrollView.AddSubview(viewController.View);
-                    viewController.DidMoveToParentViewController(this);
-                    _viewControllers.Add(viewController);
-                }
-
-                GenerateTabs();
-                Layout();
-
-                _selectedIndex = Math.Min(_viewControllerCount - 1, _selectedIndex);
-                if (_selectedIndex > 0)
-                {
-                    SwitchPage(_selectedIndex, false);
-                }
+                AddChildViewController(viewController);
+                var size = ContentScrollView.Frame.Size;
+                viewController.View.Frame = new CGRect(size.Width * i, 0, size.Width, size.Height);
+                ContentScrollView.AddSubview(viewController.View);
+                viewController.DidMoveToParentViewController(this);
+                _viewControllers.Add(viewController);
             }
+
+            GenerateTabs();
+            Layout();
+
+            _selectedIndex = Math.Min(_viewControllerCount - 1, _selectedIndex);
+            if (_selectedIndex > 0)
+                SwitchPage(_selectedIndex, false);
         }
 
+        /// <summary>
+        /// Switch the page
+        /// </summary>
+        /// <param name="index"><see cref="int"/> with the index of the page to switch to. Zero indexed.</param>
+        /// <param name="animated"><see cref="bool"/> describing whether to animate the scroll to the page. 
+        /// Will also enable a parallax effect on the Tab Indicator itself.</param>
         public void SwitchPage(int index, bool animated)
         {
             var frame = new CGRect(ContentScrollView.Frame.Size.Width * index, 0,
                 ContentScrollView.Frame.Size.Width, ContentScrollView.Frame.Size.Height);
-            if (frame.X < ContentScrollView.ContentSize.Width)
-            {
-                _enableParallax = !animated;
+            if (frame.X >= ContentScrollView.ContentSize.Width) return;
 
-                var point = _tabButtons[index].Frame;
-                point.X -= (TitleScrollView.Bounds.Size.Width - _tabButtons[index].Frame.Size.Width) / 2f;
-                TitleScrollView.SetContentOffset(new CGPoint(point.X, point.Y), animated);
-                ContentScrollView.ScrollRectToVisible(frame, animated);
-            }
+            _enableParallax = !animated;
+
+            var point = _tabButtons[index].Frame;
+            point.X -= (TitleScrollView.Bounds.Size.Width - _tabButtons[index].Frame.Size.Width) / 2f;
+            TitleScrollView.SetContentOffset(new CGPoint(point.X, point.Y), animated);
+            ContentScrollView.ScrollRectToVisible(frame, animated);
         }
 
         private void GenerateTabs()
@@ -215,8 +244,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 var button = UIButton.FromType(UIButtonType.Custom);
                 button.SetTitle(Datasource?.GetViewControllerTitle(i), UIControlState.Normal);
                 button.SetTitleColor(headerColor, UIControlState.Normal);
-                if (button.TitleLabel != null)
-                {
+                if (button.TitleLabel != null) {
                     button.TitleLabel.Font = font;
                     button.TitleLabel.TextAlignment = UITextAlignment.Center;
                 }
@@ -286,6 +314,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
                 UIView.Animate(_enableParallax ? 0.3 : 0, LayoutTabIndicator, () => {
                     Delegate?.DidShowViewController(_selectedIndex);
+                    OnShowViewController?.Invoke(this, _selectedIndex);
                 });
             }
 
