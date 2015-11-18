@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
 using Foundation;
@@ -37,7 +38,15 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <summary>
         /// Currently selected <see cref="UIViewController"/>.
         /// </summary>
-        public UIViewController SelectedViewController => _viewControllers[_selectedIndex];
+        public UIViewController SelectedViewController
+        {
+            get
+            {
+                if (_selectedIndex < 0) return null;
+                if (!_viewControllers.Any()) return null;
+                return _viewControllers[_selectedIndex];
+            }
+        }
 
         /// <summary>
         /// <see cref="UIColor"/> used for the background color of the Tab Indicator.
@@ -217,6 +226,9 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// Will also enable a parallax effect on the Tab Indicator itself.</param>
         public void SwitchPage(int index, bool animated)
         {
+            if (ContentScrollView == null) return;
+            if (TitleScrollView == null) return;
+
             var frame = new CGRect(ContentScrollView.Frame.Size.Width * index, 0,
                 ContentScrollView.Frame.Size.Width, ContentScrollView.Frame.Size.Height);
             if (frame.X >= ContentScrollView.ContentSize.Width) return;

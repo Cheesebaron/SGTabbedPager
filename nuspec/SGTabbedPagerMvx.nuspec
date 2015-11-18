@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre6</version>
+    <version>0.0.1-pre7</version>
     <title>SGTabbedPager (MvvmCross)</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -20,6 +20,8 @@
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
     <releaseNotes>
+0.0.1-pre7
+Guard against more NRE when rotating screen
 0.0.1-pre6
 Added event equivalent of the delegate
 Guard against potential NPE when rotating screen
