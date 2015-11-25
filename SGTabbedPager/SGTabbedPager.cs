@@ -32,8 +32,9 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIView _bottomLine, _tabIndicator;
         private int _selectedIndex;
         private bool _enableParallax = true;
-        private UIColor _tabColor;
+		private UIColor _tabColor;
         private UIColor _bottomLineColor;
+		private UIColor _titleBackgroundColor = UIColor.White;
 
         /// <summary>
         /// Currently selected <see cref="UIViewController"/>.
@@ -61,6 +62,20 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                     _tabIndicator.BackgroundColor = _tabColor;
             }
         }
+
+		/// <summary>
+		/// <see cref="UIColor"/> used for the background color of the Tab Scroll Area.
+		/// </summary>
+		public UIColor TitleBackgroundColor
+		{
+			get { return _titleBackgroundColor; }
+			set
+			{
+				_titleBackgroundColor = value;                
+				if (TitleScrollView != null)
+					TitleScrollView.BackgroundColor = _titleBackgroundColor;
+			}
+		}
 
         /// <summary>
         /// <see cref="UIFont"/> used for the Tab Items.
@@ -119,7 +134,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             TitleScrollView = new UIScrollView
             {
                 TranslatesAutoresizingMaskIntoConstraints = false,
-                BackgroundColor = UIColor.White,
+                BackgroundColor = _titleBackgroundColor,
                 CanCancelContentTouches = false,
                 ShowsHorizontalScrollIndicator = false,
                 Bounces = false,
