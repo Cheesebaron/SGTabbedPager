@@ -323,6 +323,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         private void LayoutTabIndicator()
         {
+            if (_tabButtons.Count == 0)  return;
             var labelF = _tabButtons[_selectedIndex].Frame;
             _tabIndicator.Frame = new CGRect(labelF.X, labelF.Size.Height - 4, labelF.Size.Width, 4);
         }
