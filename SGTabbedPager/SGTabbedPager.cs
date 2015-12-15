@@ -229,6 +229,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             Layout();
 
             _selectedIndex = Math.Min(_viewControllerCount - 1, _selectedIndex);
+            _selectedIndex = Math.Max(0, _selectedIndex);
             if (_selectedIndex > 0)
                 SwitchPage(_selectedIndex, false);
         }
