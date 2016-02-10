@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>SGTabbedPagerMvx</id>
-    <version>0.0.1-pre7</version>
+    <version>0.0.2</version>
     <title>SGTabbedPager (MvvmCross)</title>
     <authors>Tomasz Cielecki</authors>
     <owners>Tomasz Cielecki</owners>
@@ -14,12 +14,13 @@
     <dependencies>
       <group targetFramework ="Xamarin.iOS">
         <dependency id="Cirrious.FluentLayout" version="2.0.0" />
-		    <dependency id="MvvmCross.HotTuna.MvvmCrossLibraries" version="4.0.0-beta5" />
-        <dependency id="MvvmCross.HotTuna.Binding" version="4.0.0-beta5" />
+        <dependency id="MvvmCross.Binding" version="4.0.0" />
       </group>
     </dependencies>
     <iconUrl>http://i.imgur.com/V3983YY.png</iconUrl>
     <releaseNotes>
+0.0.2
+Built against MvvmCross 4.0.0 stable
 0.0.1-pre7
 Guard against more NRE when rotating screen
 0.0.1-pre6

@@ -7,8 +7,8 @@ using Foundation;
 using UIKit;
 
 #if __MVX__
-using Cirrious.MvvmCross.Touch.Views;
-using Cirrious.MvvmCross.ViewModels;
+using MvvmCross.Core.ViewModels;
+using MvvmCross.iOS.Views;
 #endif
 
 namespace DK.Ostebaronen.Touch.SGTabbedPager
