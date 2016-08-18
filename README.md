@@ -1,6 +1,8 @@
 # SGTabbedPager
 
 [![Build status](https://ci.appveyor.com/api/projects/status/6thrax3emk41gab4?svg=true)](https://ci.appveyor.com/project/Cheesebaron/sgtabbedpager)
+[![NuGet](https://img.shields.io/nuget/v/sgtabbedpager.svg?maxAge=2592000)](https://www.nuget.org/packages/sgtabbedpager/)
+[![NuGet](https://img.shields.io/nuget/v/sgtabbedpagermvx.svg?maxAge=2592000)](https://www.nuget.org/packages/sgtabbedpagermvx/)
 
 Port of [SGViewPager][4] for Xamarin.iOS
 
