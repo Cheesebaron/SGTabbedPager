@@ -1,22 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGTabbedPager", "SGTabbedPager\SGTabbedPager.csproj", "{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGTabbedPagerMvx", "SGTabbedPagerMvx\SGTabbedPagerMvx.csproj", "{78B8B77D-BF64-4E01-A266-ECA287103852}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{FB840E6C-F4A9-4688-9A2E-B6005030DB21}"
-	ProjectSection(SolutionItems) = preProject
-		nuspec\pack.bat = nuspec\pack.bat
-		nuspec\SGTabbedPager.nuspec = nuspec\SGTabbedPager.nuspec
-		nuspec\SGTabbedPagerMvx.nuspec = nuspec\SGTabbedPagerMvx.nuspec
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1E46C7F7-2953-458B-B7F1-C524AEAC028F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Samples\Sample\Sample.csproj", "{316E6876-54B5-4F6A-BE8E-5BF6E3392352}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{316E6876-54B5-4F6A-BE8E-5BF6E3392352}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
