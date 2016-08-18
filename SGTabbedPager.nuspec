@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SGTabbedPager</id>
+    <title>SGTabbedPager</title>
+    <description>Tabbed pager for iOS</description>
+    <dependencies>
+      <group targetFramework="Xamarin.iOS">
+        <dependency id="Cirrious.FluentLayout" version="2.5.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

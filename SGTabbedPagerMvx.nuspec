@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>SGTabbedPagerMvx</id>
+    <title>SGTabbedPager (MvvmCross)</title>
+    <description>Tabbed pager for iOS (MvvmCross bindable version)</description>
+    <dependencies>
+      <group targetFramework ="Xamarin.iOS">
+        <dependency id="Cirrious.FluentLayout" version="2.5.0" />
+        <dependency id="MvvmCross.Binding" version="4.2.3" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
