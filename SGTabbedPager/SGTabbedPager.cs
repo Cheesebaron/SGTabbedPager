@@ -229,6 +229,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             Layout();
 
             _selectedIndex = Math.Min(_viewControllerCount - 1, _selectedIndex);
+            _selectedIndex = Math.Max(0, _selectedIndex);
             if (_selectedIndex > 0)
                 SwitchPage(_selectedIndex, false);
         }
@@ -322,6 +323,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         private void LayoutTabIndicator()
         {
+            if (_tabButtons.Count == 0)  return;
             var labelF = _tabButtons[_selectedIndex].Frame;
             _tabIndicator.Frame = new CGRect(labelF.X, labelF.Size.Height - 4, labelF.Size.Width, 4);
         }
