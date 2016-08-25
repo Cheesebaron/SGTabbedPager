@@ -25,8 +25,10 @@ namespace SampleMvx.Core.ViewModels
 
         private void DoAddPageCommand()
         {
-            Pages.Add(new PageViewModel { Hello = $"Hello SGTabbedPager {++PageCount}"});
+            ++PageCount;
             RaisePropertyChanged(() => PageCount);
+
+            Pages.Add(new PageViewModel { Hello = $"Hello SGTabbedPager {PageCount}"});
         }
 
         private MvxCommand _removePageCommand;
@@ -44,9 +46,10 @@ namespace SampleMvx.Core.ViewModels
         {
             if (!Pages.Any()) return;
 
-            Pages.Remove(Pages.Last());
             --PageCount;
             RaisePropertyChanged(() => PageCount);
+
+            Pages.Remove(Pages.Last());
         }
     }
 }
