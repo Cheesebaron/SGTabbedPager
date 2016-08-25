@@ -97,7 +97,7 @@ Task("PackageMvx")
 	.Does(() => {
 	if (IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
 		GitLink(sln.GetDirectory(), new GitLinkSettings {
-			ArgumentCustomization = args => args.Append("-ignore Sample")
+			ArgumentCustomization = args => args.Append("-ignore Sample,SampleMvx.Core,SampleMvx.iOS")
 		});
 
 	EnsureDirectoryExists(outputDir);
