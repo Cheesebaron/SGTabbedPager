@@ -48,13 +48,18 @@ Task("Build")
 	);
 });
 
+Task("GitLink")
+	.WithCriteria(() => IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
+	.Does(() => {
+	GitLink(sln.GetDirectory(), new GitLinkSettings {
+		ArgumentCustomization = args => args.Append("-ignore sample,samplemvx.core,samplemvx.ios")
+	});
+});
+
 Task("Package")
 	.IsDependentOn("Build")
+	.IsDependentOn("GitLink")
 	.Does(() => {
-	if (IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
-		GitLink(sln.GetDirectory(), new GitLinkSettings {
-			ArgumentCustomization = args => args.Append("-ignore Sample")
-		});
 
 	EnsureDirectoryExists(outputDir);
 
@@ -94,11 +99,8 @@ Task("Package")
 
 Task("PackageMvx")
 	.IsDependentOn("Build")
+	.IsDependentOn("GitLink")
 	.Does(() => {
-	if (IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
-		GitLink(sln.GetDirectory(), new GitLinkSettings {
-			ArgumentCustomization = args => args.Append("-ignore Sample,SampleMvx.Core,SampleMvx.iOS")
-		});
 
 	EnsureDirectoryExists(outputDir);
 
