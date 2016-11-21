@@ -52,7 +52,8 @@ Task("GitLink")
 	.WithCriteria(() => IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
 	.Does(() => {
 	GitLink(sln.GetDirectory(), new GitLinkSettings {
-		ArgumentCustomization = args => args.Append("-ignore sample,samplemvx.core,samplemvx.ios")
+		ArgumentCustomization = args => args.Append("-ignore sample,samplemvx.core,samplemvx.ios"),
+		RepositoryUrl = "https://github.com/Cheesebaron/SGTabbedPager"
 	});
 });
 
