@@ -39,9 +39,6 @@
     <Compile Include="..\SGTabbedPager\ISGTabbedPagerDatasource.cs">
       <Link>ISGTabbedPagerDatasource.cs</Link>
     </Compile>
-    <Compile Include="..\SGTabbedPager\ISGTabbedPagerDelegate.cs">
-      <Link>ISGTabbedPagerDelegate.cs</Link>
-    </Compile>
     <Compile Include="..\SGTabbedPager\SGTabbedPager.cs">
       <Link>SGTabbedPager.cs</Link>
     </Compile>

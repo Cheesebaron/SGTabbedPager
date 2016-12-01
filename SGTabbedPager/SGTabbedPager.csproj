@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{B5CB36F0-11F2-48E4-9DEE-21DB3742DAF5}</ProjectGuid>
@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="SGTabbedPager.cs" />
     <Compile Include="ISGTabbedPagerDatasource.cs" />
-    <Compile Include="ISGTabbedPagerDelegate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

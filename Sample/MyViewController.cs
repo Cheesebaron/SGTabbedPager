@@ -7,7 +7,7 @@ using UIKit;
 
 namespace Sample
 {
-    public class MyViewController : SGTabbedPager, ISGTabbedPagerDatasource, ISGTabbedPagerDelegate
+    public class MyViewController : SGTabbedPager, ISGTabbedPagerDatasource
     {
         private static readonly List<PageViewController> Pages = new List<PageViewController> {
             new PageViewController {Number = 1},
@@ -27,7 +27,9 @@ namespace Sample
             base.ViewDidLoad();
 
             // Adjust this to put pager on bottom or top
-            OnBottom = true;
+            //ShowOnBottom = true;
+
+            OnShowViewController += OnPageShowing;
 
             if (RespondsToSelector(new Selector("setEdgesForExtendedLayout:")))
                 EdgesForExtendedLayout = UIRectEdge.None;
@@ -38,6 +40,12 @@ namespace Sample
             HeaderColor = UIColor.DarkGray;
             BottomLineColor = UIColor.White;
             Title = "SGTabbedPager Sample";
+        }
+
+        public override void ViewDidUnload()
+        {
+            base.ViewDidUnload();
+            OnShowViewController -= OnPageShowing;
         }
 
         public int NumberOfViewControllers => Pages.Count;
@@ -52,7 +60,7 @@ namespace Sample
             return Pages[page].Title;
         }
 
-        public void DidShowViewController(int page)
+        private void OnPageShowing(object sender, int page)
         {
             Console.WriteLine($"Did show {page}");
         }

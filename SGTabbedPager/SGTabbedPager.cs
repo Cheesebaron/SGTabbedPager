@@ -123,11 +123,6 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         public ISGTabbedPagerDatasource Datasource { get; set; }
 
         /// <summary>
-        /// An <see cref="ISGTabbedPagerDelegate"/> used to call back when the <see cref="UIViewController"/> is changed.
-        /// </summary>
-        public ISGTabbedPagerDelegate Delegate { get; set; }
-
-        /// <summary>
         /// Event invoked when <see cref="UIViewController"/> is changed.
         /// </summary>
         public event EventHandler<int> OnShowViewController;
@@ -369,7 +364,6 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
                 UIView.Animate(_enableParallax ? 0.3 : 0, LayoutTabIndicator, () =>
                 {
-                    Delegate?.DidShowViewController(_selectedIndex);
                     OnShowViewController?.Invoke(this, _selectedIndex);
                 });
             }
