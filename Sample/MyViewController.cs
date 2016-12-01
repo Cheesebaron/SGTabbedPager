@@ -29,7 +29,7 @@ namespace Sample
             // Adjust this to put pager on bottom or top
             //ShowOnBottom = true;
 
-            IconAlignment = IconAlignment.Right;
+            //IconAlignment = IconAlignment.Right;
 
             OnShowViewController += OnPageShowing;
 
@@ -38,8 +38,11 @@ namespace Sample
 
             Datasource = this;
             TabColor = UIColorHelpers.GetRandomColor();
-            HeaderFont = UIFont.BoldSystemFontOfSize(25);
+            HeaderFont = UIFont.SystemFontOfSize(25);
             HeaderColor = UIColor.DarkGray;
+            SelectedHeaderFont = UIFont.BoldSystemFontOfSize(25);
+            SelectedHeaderColor = UIColor.Black;
+            IconSpacing = 20;
             BottomLineColor = UIColor.White;
             Title = "SGTabbedPager Sample";
         }

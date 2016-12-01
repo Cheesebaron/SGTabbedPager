@@ -36,9 +36,12 @@ namespace SampleMvx.iOS.Views
 
             Datasource = dataSource;
             TabColor = UIColorHelpers.GetRandomColor();
-            HeaderFont = UIFont.BoldSystemFontOfSize(25);
+            HeaderFont = UIFont.SystemFontOfSize(25);
             HeaderColor = UIColor.DarkGray;
+            SelectedHeaderFont = UIFont.BoldSystemFontOfSize(25);
+            SelectedHeaderColor = UIColor.Black;
             BottomLineColor = UIColor.White;
+            IconSpacing = 15;
             Title = "MvxSGTabbedPager Sample";
 
             IconAlignment = IconAlignment.Right;
