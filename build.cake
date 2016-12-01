@@ -13,7 +13,7 @@ var target = Argument("target", "Default");
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
-var releaseNotes = ParseReleaseNotes("./releasenotes.md").Notes.ToArray(),
+var releaseNotes = ParseReleaseNotes("./releasenotes.md").Notes.ToArray();
 
 Task("Clean").Does(() =>
 {
