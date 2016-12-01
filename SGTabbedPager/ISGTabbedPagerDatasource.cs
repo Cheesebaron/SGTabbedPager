@@ -7,5 +7,6 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         int NumberOfViewControllers { get; }
         UIViewController GetViewController(int page);
         string GetViewControllerTitle(int page);
+        UIImage GetViewControllerIcon(int page);
     }
 }
