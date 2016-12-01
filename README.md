@@ -16,7 +16,7 @@ or for MvvmCross
     > PM Install-Package SGTabbedPagerMvx
     
 ## Usage
-Make your `UIVievController` inherit from `SGTabbedPager` or if you are using MvvmCross `SGTabbedPager<TViewModel>`. Implement the two interfaces `ISGTabbedPagerDelegate` and `ISGTabbedPagerDatasource`.
+Make your `UIVievController` inherit from `SGTabbedPager` or if you are using MvvmCross `SGTabbedPager<TViewModel>`. Implement the `ISGTabbedPagerDatasource` interface to provide pages to the pager.
 
 Make sure you set the `DataSource` on your ViewControll to your `ISGTabbedPagerDatasource` implementation.
 
@@ -25,6 +25,18 @@ Use `TabColor` to set the color of the indicator on each tab item.
 See the [Sample][2] for usage.
 
 ![gif][1]
+
+### Listening to page changes
+
+Use the event `OnShowViewController` to get the index of the selected `UIViewController`.
+
+```
+OnShowViewController += (s, e) => Console.WriteLine($"Showing Page {e}");
+```
+
+### Position tabbed pager bar on bottom
+
+Use the `ShowOnBottom` proprety to show the tabbed pager bar on the bottom. This will adjust the Constraints to position it on the bottom of the page.
 
 ## License
 See the [License file][3].
