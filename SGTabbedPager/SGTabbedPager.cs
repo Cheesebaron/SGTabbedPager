@@ -32,9 +32,25 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIView _bottomLine, _tabIndicator;
         private int _selectedIndex;
         private bool _enableParallax = true;
-		private UIColor _tabColor;
+        private UIColor _tabColor;
         private UIColor _bottomLineColor;
-		private UIColor _titleBackgroundColor = UIColor.White;
+        private UIColor _titleBackgroundColor = UIColor.White;
+        private bool _showOnBottom;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> shows on bottom.
+        /// </summary>
+        /// <value><c>true</c> if show on bottom; otherwise, <c>false</c>.</value>
+        public bool ShowOnBottom
+        {
+            get { return _showOnBottom; }
+            set
+            {
+                _showOnBottom = value;
+                AdjustConstraints();
+            }
+        }
 
         /// <summary>
         /// Currently selected <see cref="UIViewController"/>.
@@ -57,25 +73,25 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             get { return _tabColor; }
             set
             {
-                _tabColor = value;                
+                _tabColor = value;
                 if (_tabIndicator != null)
                     _tabIndicator.BackgroundColor = _tabColor;
             }
         }
 
-		/// <summary>
-		/// <see cref="UIColor"/> used for the background color of the Tab Scroll Area.
-		/// </summary>
-		public UIColor TitleBackgroundColor
-		{
-			get { return _titleBackgroundColor; }
-			set
-			{
-				_titleBackgroundColor = value;                
-				if (TitleScrollView != null)
-					TitleScrollView.BackgroundColor = _titleBackgroundColor;
-			}
-		}
+        /// <summary>
+        /// <see cref="UIColor"/> used for the background color of the Tab Scroll Area.
+        /// </summary>
+        public UIColor TitleBackgroundColor
+        {
+            get { return _titleBackgroundColor; }
+            set
+            {
+                _titleBackgroundColor = value;
+                if (TitleScrollView != null)
+                    TitleScrollView.BackgroundColor = _titleBackgroundColor;
+            }
+        }
 
         /// <summary>
         /// <see cref="UIFont"/> used for the Tab Items.
@@ -159,16 +175,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             };
             View.AddSubview(ContentScrollView);
 
-            View.AddConstraints(
-                TitleScrollView.AtTopOf(View),
-                TitleScrollView.AtLeftOf(View),
-                TitleScrollView.AtRightOf(View),
-                TitleScrollView.Height().EqualTo(_tabHeight),
-
-                ContentScrollView.Below(TitleScrollView),
-                ContentScrollView.WithSameWidth(TitleScrollView),
-                ContentScrollView.AtBottomOf(View)
-                );
+            AdjustConstraints();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -204,7 +211,8 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             if (ContentScrollView != null)
                 ContentScrollView.Delegate = null;
 
-            coordinator?.AnimateAlongsideTransition(context => {}, context => {
+            coordinator?.AnimateAlongsideTransition(context => { }, context =>
+            {
                 if (TitleScrollView != null)
                     TitleScrollView.Delegate = this;
                 if (ContentScrollView != null)
@@ -283,13 +291,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
             var font = HeaderFont ?? UIFont.FromName("HelveticaNeue-Thin", 20);
             var headerColor = HeaderColor ?? UIColor.Black;
-            
+
             for (var i = 0; i < _viewControllerCount; i++)
-            {                
+            {
                 var button = UIButton.FromType(UIButtonType.Custom);
                 button.SetTitle(Datasource?.GetViewControllerTitle(i), UIControlState.Normal);
                 button.SetTitleColor(headerColor, UIControlState.Normal);
-                if (button.TitleLabel != null) {
+                if (button.TitleLabel != null)
+                {
                     button.TitleLabel.Font = font;
                     button.TitleLabel.TextAlignment = UITextAlignment.Center;
                 }
@@ -340,7 +349,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         private void LayoutTabIndicator()
         {
-            if (_tabButtons.Count == 0)  return;
+            if (_tabButtons.Count == 0) return;
             var labelF = _tabButtons[_selectedIndex].Frame;
             _tabIndicator.Frame = new CGRect(labelF.X, labelF.Size.Height - 4, labelF.Size.Width, 4);
         }
@@ -358,7 +367,8 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             {
                 _selectedIndex = next;
 
-                UIView.Animate(_enableParallax ? 0.3 : 0, LayoutTabIndicator, () => {
+                UIView.Animate(_enableParallax ? 0.3 : 0, LayoutTabIndicator, () =>
+                {
                     Delegate?.DidShowViewController(_selectedIndex);
                     OnShowViewController?.Invoke(this, _selectedIndex);
                 });
@@ -385,6 +395,31 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         {
             if (Equals(scrollView, ContentScrollView))
                 _enableParallax = true;
+        }
+
+        private void AdjustConstraints()
+        {
+            View.RemoveConstraints(View.Constraints);
+
+            View.AddConstraints(
+                ShowOnBottom ?
+                    TitleScrollView.AtBottomOf(View) :
+                    TitleScrollView.AtTopOf(View),
+
+                TitleScrollView.AtLeftOf(View),
+                TitleScrollView.AtRightOf(View),
+                TitleScrollView.Height().EqualTo(_tabHeight),
+
+                ContentScrollView.WithSameWidth(TitleScrollView),
+
+                ShowOnBottom ?
+                    ContentScrollView.Above(TitleScrollView) :
+                    ContentScrollView.Below(TitleScrollView),
+
+                ShowOnBottom ?
+                    ContentScrollView.AtTopOf(View) :
+                    ContentScrollView.AtBottomOf(View)
+                );
         }
     }
 }

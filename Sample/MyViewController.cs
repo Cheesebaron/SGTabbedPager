@@ -26,6 +26,9 @@ namespace Sample
 
             base.ViewDidLoad();
 
+            // Adjust this to put pager on bottom or top
+            OnBottom = true;
+
             if (RespondsToSelector(new Selector("setEdgesForExtendedLayout:")))
                 EdgesForExtendedLayout = UIRectEdge.None;
 
