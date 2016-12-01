@@ -5,3 +5,7 @@
 
 ### New in 1.2.0
 - Added Icon support, adds a new method in the ISGTabbedPagerDatasource interface. Just return null if you don't want an icons showing.
+
+### New in 1.3.0
+- Added support for adjusting Selected Item Color and Font
+- Fixed issue with IconSpacing, which wasn't respected 
