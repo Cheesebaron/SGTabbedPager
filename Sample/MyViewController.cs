@@ -29,6 +29,8 @@ namespace Sample
             // Adjust this to put pager on bottom or top
             //ShowOnBottom = true;
 
+            IconAlignment = IconAlignment.Right;
+
             OnShowViewController += OnPageShowing;
 
             if (RespondsToSelector(new Selector("setEdgesForExtendedLayout:")))
@@ -64,6 +66,21 @@ namespace Sample
         {
             Console.WriteLine($"Did show {page}");
         }
+
+        private Random _rand = new Random();
+
+        public UIImage GetViewControllerIcon(int page)
+        {
+            var index = _rand.Next(0, 3);
+            return TitleImages[index];
+        }
+
+        private UIImage[] TitleImages = {
+            UIImage.FromBundle("ic_email"),
+            UIImage.FromBundle("ic_favorite"),
+            UIImage.FromBundle("ic_help"),
+            UIImage.FromBundle("ic_new_releases")
+        };
     }
 
     public class PageViewController : UIViewController

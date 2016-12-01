@@ -40,6 +40,8 @@ namespace SampleMvx.iOS.Views
             HeaderColor = UIColor.DarkGray;
             BottomLineColor = UIColor.White;
             Title = "MvxSGTabbedPager Sample";
+
+            IconAlignment = IconAlignment.Right;
         }
 
         public class DataSource : ISGTabbedPagerDatasource
@@ -50,7 +52,7 @@ namespace SampleMvx.iOS.Views
             {
                 _pages = pages;
                 _pages.CollectionChanged += (sender, args) => pager.ReloadData();
-            } 
+            }
 
             public int NumberOfViewControllers { get; set; }
             public UIViewController GetViewController(int page)
@@ -60,6 +62,20 @@ namespace SampleMvx.iOS.Views
                     DataContext = _pages?[page]
                 };
             }
+
+            private Random _rand = new Random();
+            public UIImage GetViewControllerIcon(int page)
+            {
+                var index = _rand.Next(0, 3);
+                return TitleImages[index];
+            }
+
+            private UIImage[] TitleImages = {
+                UIImage.FromBundle("ic_email"),
+                UIImage.FromBundle("ic_favorite"),
+                UIImage.FromBundle("ic_help"),
+                UIImage.FromBundle("ic_new_releases")
+            };
 
             public string GetViewControllerTitle(int page) => _pages[page]?.Hello;
         }

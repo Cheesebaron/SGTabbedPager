@@ -102,38 +102,31 @@
       <HintPath>..\..\packages\Cirrious.FluentLayout.2.5.0\lib\Xamarin.iOS10\Cirrious.FluentLayouts.Touch.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Binding.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Core, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Core.4.2.3\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Localization, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Binding.4.2.3\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MvvmCross.Platform.iOS, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\MvvmCross.Platform.4.2.3\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
+    <Reference Include="MvvmCross.Platform">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.4.0\lib\Xamarin.iOS10\MvvmCross.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Platform.iOS">
+      <HintPath>..\..\packages\MvvmCross.Platform.4.4.0\lib\Xamarin.iOS10\MvvmCross.Platform.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Core">
+      <HintPath>..\..\packages\MvvmCross.Core.4.4.0\lib\Xamarin.iOS10\MvvmCross.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.iOS">
+      <HintPath>..\..\packages\MvvmCross.Core.4.4.0\lib\Xamarin.iOS10\MvvmCross.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding">
+      <HintPath>..\..\packages\MvvmCross.Binding.4.4.0\lib\Xamarin.iOS10\MvvmCross.Binding.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Binding.iOS">
+      <HintPath>..\..\packages\MvvmCross.Binding.4.4.0\lib\Xamarin.iOS10\MvvmCross.Binding.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="MvvmCross.Localization">
+      <HintPath>..\..\packages\MvvmCross.Binding.4.4.0\lib\Xamarin.iOS10\MvvmCross.Localization.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Entitlements.plist" />
@@ -149,6 +142,44 @@
       <Project>{31d7792c-8339-4c32-8c91-123c9b248b83}</Project>
       <Name>SampleMvx.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\Sample\Resources\ic_email.png">
+      <Link>Resources\ic_email.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_email_2x.png">
+      <Link>Resources\ic_email_2x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_email_3x.png">
+      <Link>Resources\ic_email_3x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_favorite.png">
+      <Link>Resources\ic_favorite.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_favorite_2x.png">
+      <Link>Resources\ic_favorite_2x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_favorite_3x.png">
+      <Link>Resources\ic_favorite_3x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_help.png">
+      <Link>Resources\ic_help.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_help_2x.png">
+      <Link>Resources\ic_help_2x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_help_3x.png">
+      <Link>Resources\ic_help_3x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_new_releases.png">
+      <Link>Resources\ic_new_releases.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_new_releases_2x.png">
+      <Link>Resources\ic_new_releases_2x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\Sample\Resources\ic_new_releases_3x.png">
+      <Link>Resources\ic_new_releases_3x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

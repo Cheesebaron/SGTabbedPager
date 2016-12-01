@@ -114,5 +114,19 @@
       <IsWatchApp>false</IsWatchApp>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_favorite_2x.png" />
+    <BundleResource Include="Resources\ic_favorite_3x.png" />
+    <BundleResource Include="Resources\ic_favorite.png" />
+    <BundleResource Include="Resources\ic_help_2x.png" />
+    <BundleResource Include="Resources\ic_help_3x.png" />
+    <BundleResource Include="Resources\ic_help.png" />
+    <BundleResource Include="Resources\ic_new_releases_2x.png" />
+    <BundleResource Include="Resources\ic_new_releases_3x.png" />
+    <BundleResource Include="Resources\ic_new_releases.png" />
+    <BundleResource Include="Resources\ic_email_2x.png" />
+    <BundleResource Include="Resources\ic_email_3x.png" />
+    <BundleResource Include="Resources\ic_email.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
