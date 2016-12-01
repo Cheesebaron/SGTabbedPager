@@ -96,7 +96,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <summary>
         /// <see cref="UIFont"/> used for the Tab Items.
         /// </summary>
+        /// <value>The header font.</value>
         public UIFont HeaderFont { get; set; }
+
+        /// <summary>
+        /// Gets or sets the <see cref="UIFont"/> for a selected Tab Item.
+        /// </summary>
+        /// <value>The selected header font.</value>
+        public UIFont SelectedHeaderFont { get; set; }
 
         /// <summary>
         /// <see cref="UIColor"/> of the line of the bottom of the Tab Indicator.
@@ -116,6 +123,12 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <see cref="UIColor"/> of the title on each Tab Item.
         /// </summary>
         public UIColor HeaderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color of the selected Tab Item.
+        /// </summary>
+        /// <value>The color of the selected Tab Item.</value>
+        public UIColor SelectedHeaderColor { get; set; }
 
         /// <summary>
         /// The <see cref="ISGTabbedPagerDatasource"/> describing which <see cref="UIViewController"/> to present.
@@ -301,8 +314,11 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
             if (Datasource == null) return;
 
-            var font = HeaderFont ?? UIFont.FromName("HelveticaNeue-Thin", 20);
-            var headerColor = HeaderColor ?? UIColor.Black;
+            var font = HeaderFont ?? UIFont.FromName("HelveticaNeue", 20);
+            var selectedFont =
+                SelectedHeaderFont ?? UIFont.FromName("HelveticaNeue-Bold", 20);
+            var headerColor = HeaderColor ?? UIColor.DarkGray;
+            var selectedHeaderColor = SelectedHeaderColor ?? UIColor.Black;
 
             for (var i = 0; i < _viewControllerCount; i++)
             {
@@ -318,6 +334,12 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                     button.TitleLabel.TextAlignment = UITextAlignment.Center;
                 }
 
+                if (i == _selectedIndex)
+                {
+                    button.TitleLabel.Font = selectedFont;
+                    button.SetTitleColor(selectedHeaderColor, UIControlState.Normal);
+                }
+
                 if (image != null)
                 {
                     button.SetImage(image, UIControlState.Normal);
@@ -325,9 +347,12 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
                     if (IconAlignment == IconAlignment.Right)
                     {
-                        button.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
-                        button.TitleLabel.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
-                        button.ImageView.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                        button.Transform =
+                            CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                        button.TitleLabel.Transform =
+                            CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                        button.ImageView.Transform =
+                            CGAffineTransform.MakeScale(-1.0f, 1.0f);
                     }
 
                     button.SizeToFit();
@@ -374,7 +399,8 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
                 label.Frame = new CGRect(currentX, 0.0, label.Frame.Size.Width, _tabHeight);
                 if (i == _viewControllerCount - 1)
-                    currentX += (size.Width - label.Frame.Size.Width) / 2f + label.Frame.Size.Width;
+                    currentX +=
+                        (size.Width - label.Frame.Size.Width) / 2f + label.Frame.Size.Width;
                 else
                     currentX += label.Frame.Size.Width + 30;
                 var vc = _viewControllers[i];
@@ -408,6 +434,23 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
                 UIView.Animate(_enableParallax ? 0.3 : 0, LayoutTabIndicator, () =>
                 {
+                    var headerColor = HeaderColor ?? UIColor.DarkGray;
+                    // Set original font for all buttons
+                    foreach (var button in _tabButtons)
+                    {
+                        var originalFont =
+                            HeaderFont ?? UIFont.FromName("HelveticaNeue", 20);
+                        button.TitleLabel.Font = originalFont;
+                        button.SetTitleColor(headerColor, UIControlState.Normal);
+                    }
+
+                    headerColor = SelectedHeaderColor ?? UIColor.Black;
+                    // Set the selected font for current button
+                    var item = _tabButtons[_selectedIndex];
+                    var font =
+                        SelectedHeaderFont ?? UIFont.FromName("HelveticaNeue-Bold", 20);
+                    item.TitleLabel.Font = font;
+                    item.SetTitleColor(headerColor, UIControlState.Normal);
                     OnShowViewController?.Invoke(this, _selectedIndex);
                 });
             }
