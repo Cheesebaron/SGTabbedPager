@@ -321,7 +321,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 if (image != null)
                 {
                     button.SetImage(image, UIControlState.Normal);
-                    button.ImageEdgeInsets = new UIEdgeInsets(0, 0, 0, IconSpacing);
+                    button.ImageEdgeInsets = new UIEdgeInsets(0, -IconSpacing, 0, 0);
 
                     if (IconAlignment == IconAlignment.Right)
                     {
