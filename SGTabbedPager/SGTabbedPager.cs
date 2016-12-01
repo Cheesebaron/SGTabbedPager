@@ -129,7 +129,8 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         public IconAlignment IconAlignment { get; set; }
 
         /// <summary>
-        /// Gets or sets the icon spacing. This is the space between the Title and Icon
+        /// Gets or sets the icon spacing. This is the space for the Edge Inset for the
+        /// Image. 
         /// </summary>
         /// <value>The icon spacing.</value>
         public int IconSpacing { get; set; } = 6;
