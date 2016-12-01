@@ -123,6 +123,18 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         public ISGTabbedPagerDatasource Datasource { get; set; }
 
         /// <summary>
+        /// Gets or sets the icon alignment for tab titles.
+        /// </summary>
+        /// <value>The icon alignment.</value>
+        public IconAlignment IconAlignment { get; set; }
+
+        /// <summary>
+        /// Gets or sets the icon spacing. This is the space between the Title and Icon
+        /// </summary>
+        /// <value>The icon spacing.</value>
+        public int IconSpacing { get; set; } = 6;
+
+        /// <summary>
         /// Event invoked when <see cref="UIViewController"/> is changed.
         /// </summary>
         public event EventHandler<int> OnShowViewController;
@@ -192,8 +204,10 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 btn.RemoveTarget(ReceivedButtonTab, UIControlEvent.TouchUpInside);
             }
 
-            TitleScrollView.Delegate = null;
-            ContentScrollView.Delegate = null;
+            if (TitleScrollView != null)
+                TitleScrollView.Delegate = null;
+            if (ContentScrollView != null)
+                ContentScrollView.Delegate = null;
         }
 
         public override void ViewWillLayoutSubviews() => Layout();
@@ -284,20 +298,49 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
             _tabButtons.Clear();
 
+            if (Datasource == null) return;
+
             var font = HeaderFont ?? UIFont.FromName("HelveticaNeue-Thin", 20);
             var headerColor = HeaderColor ?? UIColor.Black;
 
             for (var i = 0; i < _viewControllerCount; i++)
             {
+                var title = Datasource.GetViewControllerTitle(i);
+                var image = Datasource.GetViewControllerIcon(i);
+
                 var button = UIButton.FromType(UIButtonType.Custom);
-                button.SetTitle(Datasource?.GetViewControllerTitle(i), UIControlState.Normal);
+                button.SetTitle(title, UIControlState.Normal);
                 button.SetTitleColor(headerColor, UIControlState.Normal);
                 if (button.TitleLabel != null)
                 {
                     button.TitleLabel.Font = font;
                     button.TitleLabel.TextAlignment = UITextAlignment.Center;
                 }
-                button.SizeToFit();
+
+                if (image != null)
+                {
+                    button.SetImage(image, UIControlState.Normal);
+                    button.ImageEdgeInsets = new UIEdgeInsets(0, 0, 0, IconSpacing);
+
+                    if (IconAlignment == IconAlignment.Right)
+                    {
+                        button.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                        button.TitleLabel.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                        button.ImageView.Transform = CGAffineTransform.MakeScale(-1.0f, 1.0f);
+                    }
+
+                    button.SizeToFit();
+
+                    var imageSize = image.Size.Width;
+                    var textSize = new NSString(title).StringSize(font).Width;
+                    var width = textSize + imageSize + IconSpacing;
+                    button.Frame = new CGRect(0, 0, width, button.Frame.Height);
+                }
+                else
+                {
+                    button.SizeToFit();
+                }
+
                 button.AddTarget(ReceivedButtonTab, UIControlEvent.TouchUpInside);
                 _tabButtons.Add(button);
                 TitleScrollView.AddSubview(button);
