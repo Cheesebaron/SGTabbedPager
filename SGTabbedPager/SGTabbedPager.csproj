@@ -38,6 +38,7 @@
     <Compile Include="SGTabbedPager.cs" />
     <Compile Include="ISGTabbedPagerDatasource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IconAlignment.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Cirrious.FluentLayouts.Touch, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
