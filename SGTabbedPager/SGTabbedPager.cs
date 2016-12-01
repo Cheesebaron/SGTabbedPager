@@ -174,7 +174,24 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+
+            TitleScrollView.Delegate = this;
+            ContentScrollView.Delegate = this;
+
             ReloadData();
+        }
+
+        public override void ViewWillDisappear(bool animated)
+        {
+            base.ViewWillDisappear(animated);
+
+            foreach (var btn in _tabButtons)
+            {
+                btn.RemoveTarget(ReceivedButtonTab, UIControlEvent.TouchUpInside);
+            }
+
+            TitleScrollView.Delegate = null;
+            ContentScrollView.Delegate = null;
         }
 
         public override void ViewWillLayoutSubviews() => Layout();
