@@ -13,6 +13,7 @@ var target = Argument("target", "Default");
 
 var isRunningOnAppVeyor = AppVeyor.IsRunningOnAppVeyor;
 var isPullRequest = AppVeyor.Environment.PullRequest.IsPullRequest;
+var releaseNotes = ParseReleaseNotes("./releasenotes.md").Notes.ToArray(),
 
 Task("Clean").Does(() =>
 {
@@ -89,6 +90,7 @@ Task("Package")
 		RequireLicenseAcceptance = false,
 		Tags = new [] {"monotouch", "ui", "pager", "xamarin", "ios"},
 		Version = versionInfo.NuGetVersion,
+		ReleaseNotes = releaseNotes,
 		Symbols = false,
 		NoPackageAnalysis = true,
 		OutputDirectory = outputDir,
@@ -130,6 +132,7 @@ Task("PackageMvx")
 		RequireLicenseAcceptance = false,
 		Tags = new [] {"monotouch", "mvvmcross", "ui", "pager", "xamarin", "ios"},
 		Version = versionInfo.NuGetVersion,
+		ReleaseNotes = releaseNotes,
 		Symbols = false,
 		NoPackageAnalysis = true,
 		OutputDirectory = outputDir,
