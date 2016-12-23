@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Cirrious.FluentLayouts.Touch;
 using CoreGraphics;
@@ -13,6 +14,8 @@ using MvvmCross.iOS.Views;
 
 namespace DK.Ostebaronen.Touch.SGTabbedPager
 {
+    [Register("SGTabbedPager")]
+    [DesignTimeVisible(true)]
 #if __MVX__
     public class MvxSGTabbedPager<TViewModel>
         : MvxViewController<TViewModel>
@@ -53,17 +56,17 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
 #else
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class.
-		/// </summary>
-		public SGTabbedPager() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class.
+        /// </summary>
+        public SGTabbedPager() { }
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class
-		/// to be instantiated by Storyboard
-		/// </summary>
-		/// <param name="handle">Handle.</param>
-		public SGTabbedPager(IntPtr handle) : base(handle) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class
+        /// to be instantiated by Storyboard
+        /// </summary>
+        /// <param name="handle">Handle.</param>
+        public SGTabbedPager(IntPtr handle) : base(handle) { }
 
 #endif
 
@@ -72,6 +75,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> shows on bottom.
         /// </summary>
         /// <value><c>true</c> if show on bottom; otherwise, <c>false</c>.</value>
+        [Export("ShowOnBottom"), Browsable(true)]
         public bool ShowOnBottom
         {
             get { return _showOnBottom; }
@@ -98,6 +102,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <summary>
         /// <see cref="UIColor"/> used for the background color of the Tab Indicator.
         /// </summary>
+        [Export("TabColor"), Browsable(true)]
         public UIColor TabColor
         {
             get { return _tabColor; }
@@ -112,6 +117,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <summary>
         /// <see cref="UIColor"/> used for the background color of the Tab Scroll Area.
         /// </summary>
+        [Export("TitleBackgroundColor"), Browsable(true)]
         public UIColor TitleBackgroundColor
         {
             get { return _titleBackgroundColor; }
@@ -127,17 +133,20 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <see cref="UIFont"/> used for the Tab Items.
         /// </summary>
         /// <value>The header font.</value>
+        [Export("HeaderFont"), Browsable(true)]
         public UIFont HeaderFont { get; set; }
 
         /// <summary>
         /// Gets or sets the <see cref="UIFont"/> for a selected Tab Item.
         /// </summary>
         /// <value>The selected header font.</value>
+        [Export("SelectedHeaderFont"), Browsable(true)]
         public UIFont SelectedHeaderFont { get; set; }
 
         /// <summary>
         /// <see cref="UIColor"/> of the line of the bottom of the Tab Indicator.
         /// </summary>
+        [Export("BottomLineColor"), Browsable(true)]
         public UIColor BottomLineColor
         {
             get { return _bottomLineColor; }
@@ -152,12 +161,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// <summary>
         /// <see cref="UIColor"/> of the title on each Tab Item.
         /// </summary>
+        [Export("HeaderColor"), Browsable(true)]
         public UIColor HeaderColor { get; set; }
 
         /// <summary>
         /// Gets or sets the color of the selected Tab Item.
         /// </summary>
         /// <value>The color of the selected Tab Item.</value>
+        [Export("SelectedHeaderColor"), Browsable(true)]
         public UIColor SelectedHeaderColor { get; set; }
 
         /// <summary>
@@ -169,6 +180,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// Gets or sets the icon alignment for tab titles.
         /// </summary>
         /// <value>The icon alignment.</value>
+        [Export("IconAlignment"), Browsable(true)]
         public IconAlignment IconAlignment { get; set; }
 
         /// <summary>
@@ -176,6 +188,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// Image. 
         /// </summary>
         /// <value>The icon spacing.</value>
+        [Export("IconSpacing"), Browsable(true)]
         public int IconSpacing { get; set; } = 6;
 
         /// <summary>
