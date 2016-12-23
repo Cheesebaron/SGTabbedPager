@@ -9,3 +9,7 @@
 ### New in 1.3.0
 - Added support for adjusting Selected Item Color and Font
 - Fixed issue with IconSpacing, which wasn't respected 
+
+### New in 1.3.1
+- Added constructors for use in storyboards and designers. Thanks @eestein
+- Added Exports for properties for use in designers
