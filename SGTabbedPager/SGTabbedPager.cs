@@ -37,6 +37,18 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIColor _titleBackgroundColor = UIColor.White;
         private bool _showOnBottom;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class.
+		/// </summary>
+		public SGTabbedPager() { }
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> class
+		/// to be instantiated by Storyboard
+		/// </summary>
+		/// <param name="handle">Handle.</param>
+		public SGTabbedPager(IntPtr handle) : base(handle) { }
+
         /// <summary>
         /// Gets or sets a value indicating whether this
         /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> shows on bottom.
