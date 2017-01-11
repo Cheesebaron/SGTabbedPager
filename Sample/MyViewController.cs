@@ -74,7 +74,7 @@ namespace Sample
 
         public UIImage GetViewControllerIcon(int page)
         {
-            var index = _rand.Next(0, 3);
+            var index = _rand.Next(0, 4);
             return TitleImages[index];
         }
 
@@ -82,7 +82,8 @@ namespace Sample
             UIImage.FromBundle("ic_email"),
             UIImage.FromBundle("ic_favorite"),
             UIImage.FromBundle("ic_help"),
-            UIImage.FromBundle("ic_new_releases")
+            UIImage.FromBundle("ic_new_releases"),
+            null
         };
     }
 
