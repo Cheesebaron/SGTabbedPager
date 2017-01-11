@@ -71,10 +71,14 @@ Task("Package")
 
 	var nugetContent = new List<NuSpecContent>();
 	foreach(var dll in GetFiles(dllDir)){
+		var dllString = dll.ToString();
+		if (dllString.EndsWith(".mdb"))
+			continue;
+
 	 	Information("File: {0}", dll.ToString());
 		nugetContent.Add(new NuSpecContent {
 			Target = "lib/Xamarin.iOS10",
-			Source = dll.ToString()
+			Source = dllString
 		});
 	}
 
@@ -113,10 +117,14 @@ Task("PackageMvx")
 
 	var nugetContent = new List<NuSpecContent>();
 	foreach(var dll in GetFiles(dllDir)){
+		var dllString = dll.ToString();
+		if (dllString.EndsWith(".mdb"))
+			continue;
+
 	 	Information("File: {0}", dll.ToString());
 		nugetContent.Add(new NuSpecContent {
 			Target = "lib/Xamarin.iOS10",
-			Source = dll.ToString()
+			Source = dllString
 		});
 	}
 
