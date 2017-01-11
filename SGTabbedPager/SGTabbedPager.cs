@@ -398,7 +398,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                             CGAffineTransform.MakeScale(-1.0f, 1.0f);
                     }
 
-                    button.SizeToFit();
+                    SizeButtonToFit(button, title, font, selectedFont);
 
                     var imageSize = image.Size.Width;
                     var textSize = new NSString(title).StringSize(font).Width;
@@ -407,12 +407,36 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 }
                 else
                 {
-                    button.SizeToFit();
+                    SizeButtonToFit(button, title, font, selectedFont);
                 }
 
                 button.AddTarget(ReceivedButtonTab, UIControlEvent.TouchUpInside);
                 _tabButtons.Add(button);
                 TitleScrollView.AddSubview(button);
+            }
+        }
+
+        private void SizeButtonToFit(UIButton button, string title, UIFont normalFont, UIFont selectedFont)
+        {
+            if (title != null)
+            {
+                var currentFont = button.Font;
+
+                var first = new NSString(title).StringSize(normalFont).Width;
+                var second = new NSString(title).StringSize(selectedFont).Width;
+
+                if (first > second)
+                    button.Font = normalFont;
+                else
+                    button.Font = selectedFont;
+
+                button.SizeToFit();
+
+                button.Font = currentFont;
+            } 
+            else 
+            {
+                button.SizeToFit();
             }
         }
 
