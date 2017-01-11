@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMvx.Core", "SampleMvx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleMvx.iOS", "SampleMvx\iOS\SampleMvx.iOS.csproj", "{EB7592B4-6689-4D9D-8DC0-F42726B1271D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{AF99BB50-B88F-4DAF-A183-6636D59048C9}"
+	ProjectSection(SolutionItems) = preProject
+		build.cake = build.cake
+		SGTabbedPager.nuspec = SGTabbedPager.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
