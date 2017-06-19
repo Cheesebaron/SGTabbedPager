@@ -1,5 +1,6 @@
 #tool "nuget:?package=GitVersion.CommandLine"
 #tool "nuget:?package=gitlink"
+#tool "nuget:?package=vswhere"
 
 var sln = new FilePath("SGTabbedPager.sln");
 var project = new FilePath("SGTabbedPager/SGTabbedPager.csproj");
@@ -22,6 +23,16 @@ Task("Clean").Does(() =>
 	CleanDirectories(outputDir.FullPath);
 });
 
+FilePath msBuildPath;
+Task("ResolveBuildTools")
+	.Does(() => 
+{
+	var vsLatest = VSWhereLatest();
+	msBuildPath = (vsLatest == null)
+		? null
+		: vsLatest.CombineWithFilePath("./MSBuild/15.0/Bin/MSBuild.exe");
+});
+
 GitVersion versionInfo = null;
 Task("Version").Does(() => {
 	GitVersion(new GitVersionSettings {
@@ -42,11 +53,14 @@ Task("Build")
 	.IsDependentOn("Version")
 	.IsDependentOn("Restore")
 	.Does(() =>  {
-	
-	DotNetBuild(sln, 
-		settings => settings.SetConfiguration("Release")
-          .WithProperty("Platform", "iPhone")
-	);
+
+	var settings = new MSBuildSettings 
+	{
+		Configuration = "Release",
+		ToolPath = msBuildPath
+	};
+
+	MSBuild(sln, settings.WithProperty("Platform", "iPhone"));
 });
 
 Task("GitLink")
