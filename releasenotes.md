@@ -13,3 +13,7 @@
 ### New in 1.3.1
 - Added constructors for use in storyboards and designers. Thanks @eestein
 - Added Exports for properties for use in designers
+
+### New in 1.4.0
+- Built against MvvmCross 5.0.3
+- Added XML doc
