@@ -35,12 +35,19 @@ Task("ResolveBuildTools")
 
 GitVersion versionInfo = null;
 Task("Version").Does(() => {
+	var branchName = AppVeyor.Environment.Repository.Branch;
+
 	GitVersion(new GitVersionSettings {
 		UpdateAssemblyInfo = true,
-		OutputType = GitVersionOutput.BuildServer
+		OutputType = GitVersionOutput.BuildServer,
+		Branch = branchName
 	});
 
-	versionInfo = GitVersion(new GitVersionSettings{ OutputType = GitVersionOutput.Json });
+	versionInfo = GitVersion(new GitVersionSettings { 
+		OutputType = GitVersionOutput.Json,
+		Branch = branchName
+	});
+	
 	Information("VI:\t{0}", versionInfo.FullSemVer);
 });
 
