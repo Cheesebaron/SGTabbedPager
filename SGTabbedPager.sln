@@ -22,6 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{AF99BB50
 		build.cake = build.cake
 		releasenotes.md = releasenotes.md
 		SGTabbedPager.nuspec = SGTabbedPager.nuspec
+		SGTabbedPagerMvx.nuspec = SGTabbedPagerMvx.nuspec
 	EndProjectSection
 EndProject
 Global
