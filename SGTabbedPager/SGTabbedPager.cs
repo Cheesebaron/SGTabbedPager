@@ -14,6 +14,9 @@ using MvvmCross.iOS.Views;
 
 namespace DK.Ostebaronen.Touch.SGTabbedPager
 {
+    /// <summary>
+    /// Tabbed pager ViewController. Shows a pager strip on top of the View, with a ScrollView underneath in pager mode
+    /// </summary>
     [Register("SGTabbedPager")]
     [DesignTimeVisible(true)]
 #if __MVX__
@@ -28,7 +31,6 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 #endif
     {
         private readonly nfloat _tabHeight = 44f;
-        protected UIScrollView TitleScrollView, ContentScrollView;
         private readonly IList<UIViewController> _viewControllers = new List<UIViewController>();
         private int _viewControllerCount;
         private readonly IList<UIButton> _tabButtons = new List<UIButton>();
@@ -39,6 +41,16 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIColor _bottomLineColor;
         private UIColor _titleBackgroundColor = UIColor.White;
         private bool _showOnBottom;
+
+        /// <summary>
+        /// Scroll View for the Pager
+        /// </summary>
+        protected UIScrollView TitleScrollView;
+
+        /// <summary>
+        /// Scroll View for the Content
+        /// </summary>
+        protected UIScrollView ContentScrollView;
 
 #if __MVX__
 
@@ -196,18 +208,21 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         /// </summary>
         public event EventHandler<int> OnShowViewController;
 
+        /// <inheritdoc />
         public override void EncodeRestorableState(NSCoder coder)
         {
             base.EncodeRestorableState(coder);
             coder.Encode(_selectedIndex, "selectedIndex");
         }
 
+        /// <inheritdoc />
         public override void DecodeRestorableState(NSCoder coder)
         {
             base.DecodeRestorableState(coder);
             _selectedIndex = coder.DecodeInt("selectedIndex");
         }
 
+        /// <inheritdoc />
         public override void LoadView()
         {
             base.LoadView();
@@ -242,6 +257,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             AdjustConstraints();
         }
 
+        /// <inheritdoc />
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -252,6 +268,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             ReloadData();
         }
 
+        /// <inheritdoc />
         public override void ViewWillDisappear(bool animated)
         {
             base.ViewWillDisappear(animated);
@@ -267,8 +284,10 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 ContentScrollView.Delegate = null;
         }
 
+        /// <inheritdoc />
         public override void ViewWillLayoutSubviews() => Layout();
 
+        /// <inheritdoc />
         public override void WillTransitionToTraitCollection(UITraitCollection traitCollection,
             IUIViewControllerTransitionCoordinator coordinator)
         {
@@ -449,6 +468,9 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             SwitchPage(index, true);
         }
 
+        /// <summary>
+        /// Layout content and title
+        /// </summary>
         protected void Layout()
         {
             var size = View.Bounds.Size;
@@ -486,6 +508,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             _tabIndicator.Frame = new CGRect(labelF.X, labelF.Size.Height - 4, labelF.Size.Width, 4);
         }
 
+        /// <inheritdoc cref="UIScrollView.Scrolled" />
         [Export("scrollViewDidScroll:")]
         public void Scrolled(UIScrollView scrollView)
         {
@@ -538,6 +561,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             }
         }
 
+        /// <inheritdoc cref="UIScrollView.ScrollAnimationEnded" />
         [Export("scrollViewDidEndScrollingAnimation:")]
         public void ScrollAnimationEnded(UIScrollView scrollView)
         {
