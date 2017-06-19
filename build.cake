@@ -47,7 +47,7 @@ Task("Version").Does(() => {
 		OutputType = GitVersionOutput.Json,
 		Branch = branchName
 	});
-	
+
 	Information("VI:\t{0}", versionInfo.FullSemVer);
 });
 
@@ -59,6 +59,7 @@ Task("Build")
 	.IsDependentOn("Clean")
 	.IsDependentOn("Version")
 	.IsDependentOn("Restore")
+	.IsDependentOn("ResolveBuildTools")
 	.Does(() =>  {
 
 	var settings = new MSBuildSettings 
@@ -67,7 +68,9 @@ Task("Build")
 		ToolPath = msBuildPath
 	};
 
-	MSBuild(sln, settings.WithProperty("Platform", "iPhone"));
+	settings.Properties.Add("Platform", new [] {"iPhone"});
+
+	MSBuild(sln, settings);
 });
 
 Task("GitLink")
