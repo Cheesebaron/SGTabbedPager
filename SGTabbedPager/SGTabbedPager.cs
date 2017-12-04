@@ -90,7 +90,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("ShowOnBottom"), Browsable(true)]
         public bool ShowOnBottom
         {
-            get { return _showOnBottom; }
+            get => _showOnBottom;
             set
             {
                 _showOnBottom = value;
@@ -117,7 +117,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("TabColor"), Browsable(true)]
         public UIColor TabColor
         {
-            get { return _tabColor; }
+            get => _tabColor;
             set
             {
                 _tabColor = value;
@@ -132,7 +132,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("TitleBackgroundColor"), Browsable(true)]
         public UIColor TitleBackgroundColor
         {
-            get { return _titleBackgroundColor; }
+            get => _titleBackgroundColor;
             set
             {
                 _titleBackgroundColor = value;
@@ -161,7 +161,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("BottomLineColor"), Browsable(true)]
         public UIColor BottomLineColor
         {
-            get { return _bottomLineColor; }
+            get => _bottomLineColor;
             set
             {
                 _bottomLineColor = value;
@@ -444,16 +444,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 var first = new NSString(title).StringSize(normalFont).Width;
                 var second = new NSString(title).StringSize(selectedFont).Width;
 
-                if (first > second)
-                    button.Font = normalFont;
-                else
-                    button.Font = selectedFont;
-
+                button.Font = first > second ? normalFont : selectedFont;
+                button.TitleLabel.AdjustsFontSizeToFitWidth = false;
+                button.TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
                 button.SizeToFit();
 
                 button.Font = currentFont;
-            } 
-            else 
+            }
+            else
             {
                 button.SizeToFit();
             }
@@ -461,8 +459,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         private void ReceivedButtonTab(object sender, EventArgs e)
         {
-            var button = sender as UIButton;
-            if (button == null) return;
+            if (!(sender is UIButton button)) return;
 
             var index = _tabButtons.IndexOf(button);
             SwitchPage(index, true);
@@ -475,8 +472,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         {
             var size = View.Bounds.Size;
             TitleScrollView.Frame = new CGRect(0, 0, size.Width, _tabHeight);
-            ContentScrollView.Frame = new CGRect(0, _tabHeight, View.Bounds.Size.Width,
-                View.Bounds.Size.Height - _tabHeight);
+            ContentScrollView.Frame = new CGRect(0, _tabHeight, size.Width, size.Height - _tabHeight);
 
             nfloat currentX = 0f;
             size = ContentScrollView.Frame.Size;
