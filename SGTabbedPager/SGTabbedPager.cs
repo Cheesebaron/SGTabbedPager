@@ -41,6 +41,8 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIColor _bottomLineColor;
         private UIColor _titleBackgroundColor = UIColor.White;
         private bool _showOnBottom;
+        private int _tabSpacing = 30;
+        private UIEdgeInsets _tabPadding = UIEdgeInsets.Zero;
 
         /// <summary>
         /// Scroll View for the Pager
@@ -95,6 +97,40 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
             {
                 _showOnBottom = value;
                 AdjustConstraints();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that is used as the spacing between tabs in
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/>.
+        /// </summary>
+        [Export("TabSpacing"), Browsable(true), DefaultValue(30)]
+        public int TabSpacing
+        {
+            get => _tabSpacing;
+            set
+            {
+                _tabSpacing = value;
+                Layout();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that is used as the padding for tab content in
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/>.
+        /// </summary>
+        [Export("TabPadding"), Browsable(true)]
+        public UIEdgeInsets TabPadding
+        {
+            get => _tabPadding;
+            set
+            {
+                _tabPadding = value;
+                foreach (var button in _tabButtons)
+                {
+                    button.ContentEdgeInsets = _tabPadding;
+                }
+                Layout();
             }
         }
 
@@ -417,15 +453,20 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                             CGAffineTransform.MakeScale(-1.0f, 1.0f);
                     }
 
+                    button.ContentEdgeInsets = _tabPadding;
                     SizeButtonToFit(button, title, font, selectedFont);
 
-                    var imageSize = image.Size.Width;
-                    var textSize = new NSString(title).StringSize(font).Width;
-                    var width = textSize + imageSize + IconSpacing;
-                    button.Frame = new CGRect(0, 0, width, button.Frame.Height);
+                    if (_tabPadding == UIEdgeInsets.Zero)
+                    {
+                        var imageSize = image.Size.Width;
+                        var textSize = new NSString(title).StringSize(font).Width;
+                        var width = textSize + imageSize + IconSpacing;
+                        button.Frame = new CGRect(0, 0, width, button.Frame.Height);
+                    }
                 }
                 else
                 {
+                    button.ContentEdgeInsets = _tabPadding;
                     SizeButtonToFit(button, title, font, selectedFont);
                 }
 
@@ -487,10 +528,11 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                     currentX +=
                         (size.Width - label.Frame.Size.Width) / 2f + label.Frame.Size.Width;
                 else
-                    currentX += label.Frame.Size.Width + 30;
+                    currentX += label.Frame.Size.Width + _tabSpacing;
                 var vc = _viewControllers[i];
                 vc.View.Frame = new CGRect(size.Width * i, 0, size.Width, size.Height);
             }
+
             TitleScrollView.ContentSize = new CGSize(currentX, _tabHeight);
             ContentScrollView.ContentSize = new CGSize(size.Width * _viewControllerCount, size.Height);
             _bottomLine.Frame = new CGRect(0, _tabHeight - 1, TitleScrollView.ContentSize.Width, 1);
