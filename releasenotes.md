@@ -17,3 +17,9 @@
 ### New in 1.4.0
 - Built against MvvmCross 5.0.3
 - Added XML doc
+
+### New in 1.5.0
+- Added ability to have the Tab Bar Static, no scrolling ([#21](https://github.com/Cheesebaron/SGTabbedPager/pull/21)) ([BitKaitsu](https://github.com/BitKaitsu))
+- Added ability to add spacing between tabs ([#21](https://github.com/Cheesebaron/SGTabbedPager/pull/21)) ([BitKaitsu](https://github.com/BitKaitsu))
+- Built against MvvmCross 5.5.2
+- Built against Cirrious.FluentLayout 2.6.0

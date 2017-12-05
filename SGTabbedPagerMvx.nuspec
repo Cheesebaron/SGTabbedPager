@@ -6,8 +6,8 @@
     <description>Tabbed pager for iOS (MvvmCross bindable version)</description>
     <dependencies>
       <group targetFramework ="Xamarin.iOS">
-        <dependency id="Cirrious.FluentLayout" version="2.5.0" />
-        <dependency id="MvvmCross.Binding" version="5.0.3" />
+        <dependency id="Cirrious.FluentLayout" version="2.6.0" />
+        <dependency id="MvvmCross.Binding" version="5.5.2" />
       </group>
     </dependencies>
   </metadata>
