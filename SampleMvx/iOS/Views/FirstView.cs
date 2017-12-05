@@ -42,6 +42,8 @@ namespace SampleMvx.iOS.Views
             SelectedHeaderColor = UIColor.Black;
             BottomLineColor = UIColor.White;
             IconSpacing = 15;
+            TabSpacing = 20;
+            //StaticTabBar = true;
             Title = "MvxSGTabbedPager Sample";
 
             IconAlignment = IconAlignment.Right;
