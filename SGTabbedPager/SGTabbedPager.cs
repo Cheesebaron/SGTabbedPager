@@ -41,6 +41,9 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         private UIColor _bottomLineColor;
         private UIColor _titleBackgroundColor = UIColor.White;
         private bool _showOnBottom;
+        private bool _staticTabBar;
+        private int _tabSpacing = 30;
+        private UIEdgeInsets _tabPadding = UIEdgeInsets.Zero;
 
         /// <summary>
         /// Scroll View for the Pager
@@ -84,17 +87,72 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         /// <summary>
         /// Gets or sets a value indicating whether this
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> is static.
+        /// 
+        /// When set to static, the tab bar is not scrollable and does not have the extra
+        /// padding before the first tab and after the last tab. Parallax animation is
+        /// also not used.
+        /// </summary>
+        /// <value><c>true</c> if tab bar scrollable; otherwise, <c>false</c>.</value>
+        [Export("StaticTabBar"), Browsable(true), DefaultValue(false)]
+        public bool StaticTabBar
+        {
+            get => _staticTabBar;
+            set
+            {
+                TitleScrollView.ScrollEnabled = !value;
+                _staticTabBar = value;
+                Layout();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this
         /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/> shows on bottom.
         /// </summary>
         /// <value><c>true</c> if show on bottom; otherwise, <c>false</c>.</value>
         [Export("ShowOnBottom"), Browsable(true)]
         public bool ShowOnBottom
         {
-            get { return _showOnBottom; }
+            get => _showOnBottom;
             set
             {
                 _showOnBottom = value;
                 AdjustConstraints();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that is used as the spacing between tabs in
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/>.
+        /// </summary>
+        [Export("TabSpacing"), Browsable(true), DefaultValue(30)]
+        public int TabSpacing
+        {
+            get => _tabSpacing;
+            set
+            {
+                _tabSpacing = value;
+                Layout();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value that is used as the padding for tab content in
+        /// <see cref="T:DK.Ostebaronen.Touch.SGTabbedPager.SGTabbedPager"/>.
+        /// </summary>
+        [Export("TabPadding"), Browsable(true)]
+        public UIEdgeInsets TabPadding
+        {
+            get => _tabPadding;
+            set
+            {
+                _tabPadding = value;
+                foreach (var button in _tabButtons)
+                {
+                    button.ContentEdgeInsets = _tabPadding;
+                }
+                Layout();
             }
         }
 
@@ -117,7 +175,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("TabColor"), Browsable(true)]
         public UIColor TabColor
         {
-            get { return _tabColor; }
+            get => _tabColor;
             set
             {
                 _tabColor = value;
@@ -132,7 +190,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("TitleBackgroundColor"), Browsable(true)]
         public UIColor TitleBackgroundColor
         {
-            get { return _titleBackgroundColor; }
+            get => _titleBackgroundColor;
             set
             {
                 _titleBackgroundColor = value;
@@ -161,7 +219,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         [Export("BottomLineColor"), Browsable(true)]
         public UIColor BottomLineColor
         {
-            get { return _bottomLineColor; }
+            get => _bottomLineColor;
             set
             {
                 _bottomLineColor = value;
@@ -359,11 +417,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 ContentScrollView.Frame.Size.Width, ContentScrollView.Frame.Size.Height);
             if (frame.X >= ContentScrollView.ContentSize.Width) return;
 
-            _enableParallax = !animated;
+            _enableParallax = animated && !_staticTabBar;
 
-            var point = _tabButtons[index].Frame;
-            point.X -= (TitleScrollView.Bounds.Size.Width - _tabButtons[index].Frame.Size.Width) / 2f;
-            TitleScrollView.SetContentOffset(new CGPoint(point.X, point.Y), animated);
+            if (!_staticTabBar)
+            {
+                var point = _tabButtons[index].Frame;
+                point.X -= (TitleScrollView.Bounds.Size.Width - _tabButtons[index].Frame.Size.Width) / 2f;
+                TitleScrollView.SetContentOffset(new CGPoint(point.X, point.Y), animated);
+            }
             ContentScrollView.ScrollRectToVisible(frame, animated);
         }
 
@@ -417,15 +478,20 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                             CGAffineTransform.MakeScale(-1.0f, 1.0f);
                     }
 
+                    button.ContentEdgeInsets = _tabPadding;
                     SizeButtonToFit(button, title, font, selectedFont);
 
-                    var imageSize = image.Size.Width;
-                    var textSize = new NSString(title).StringSize(font).Width;
-                    var width = textSize + imageSize + IconSpacing;
-                    button.Frame = new CGRect(0, 0, width, button.Frame.Height);
+                    if (_tabPadding == UIEdgeInsets.Zero)
+                    {
+                        var imageSize = image.Size.Width;
+                        var textSize = new NSString(title).StringSize(font).Width;
+                        var width = textSize + imageSize + IconSpacing;
+                        button.Frame = new CGRect(0, 0, width, button.Frame.Height);
+                    }
                 }
                 else
                 {
+                    button.ContentEdgeInsets = _tabPadding;
                     SizeButtonToFit(button, title, font, selectedFont);
                 }
 
@@ -444,16 +510,14 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 var first = new NSString(title).StringSize(normalFont).Width;
                 var second = new NSString(title).StringSize(selectedFont).Width;
 
-                if (first > second)
-                    button.Font = normalFont;
-                else
-                    button.Font = selectedFont;
-
+                button.Font = first > second ? normalFont : selectedFont;
+                button.TitleLabel.AdjustsFontSizeToFitWidth = false;
+                button.TitleLabel.LineBreakMode = UILineBreakMode.TailTruncation;
                 button.SizeToFit();
 
                 button.Font = currentFont;
-            } 
-            else 
+            }
+            else
             {
                 button.SizeToFit();
             }
@@ -461,8 +525,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
 
         private void ReceivedButtonTab(object sender, EventArgs e)
         {
-            var button = sender as UIButton;
-            if (button == null) return;
+            if (!(sender is UIButton button)) return;
 
             var index = _tabButtons.IndexOf(button);
             SwitchPage(index, true);
@@ -475,26 +538,27 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
         {
             var size = View.Bounds.Size;
             TitleScrollView.Frame = new CGRect(0, 0, size.Width, _tabHeight);
-            ContentScrollView.Frame = new CGRect(0, _tabHeight, View.Bounds.Size.Width,
-                View.Bounds.Size.Height - _tabHeight);
+            ContentScrollView.Frame = new CGRect(0, _tabHeight, size.Width, size.Height - _tabHeight);
 
             nfloat currentX = 0f;
             size = ContentScrollView.Frame.Size;
+            var width = (size.Width - _tabSpacing * (_viewControllerCount - 1)) / _viewControllerCount;
             for (var i = 0; i < _viewControllerCount; i++)
             {
                 var label = _tabButtons[i];
                 if (i == 0)
-                    currentX += (size.Width - label.Frame.Size.Width) / 2f;
+                    currentX += _staticTabBar ? 0 : (size.Width - label.Frame.Size.Width) / 2f;
 
-                label.Frame = new CGRect(currentX, 0.0, label.Frame.Size.Width, _tabHeight);
+                label.Frame = new CGRect(currentX, 0.0, _staticTabBar ? width : label.Frame.Width, _tabHeight);
                 if (i == _viewControllerCount - 1)
-                    currentX +=
+                    currentX += _staticTabBar ? 0 :
                         (size.Width - label.Frame.Size.Width) / 2f + label.Frame.Size.Width;
                 else
-                    currentX += label.Frame.Size.Width + 30;
+                    currentX += label.Frame.Size.Width + _tabSpacing;
                 var vc = _viewControllers[i];
                 vc.View.Frame = new CGRect(size.Width * i, 0, size.Width, size.Height);
             }
+
             TitleScrollView.ContentSize = new CGSize(currentX, _tabHeight);
             ContentScrollView.ContentSize = new CGSize(size.Width * _viewControllerCount, size.Height);
             _bottomLine.Frame = new CGRect(0, _tabHeight - 1, TitleScrollView.ContentSize.Width, 1);
@@ -545,6 +609,10 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 });
             }
 
+            if (_staticTabBar)
+            {
+                return;
+            }
             page = scrollView.ContentOffset.X / pageWidth;
             var index = (int)page;
             if (_enableParallax && index + 1 < _viewControllerCount)
