@@ -1,7 +1,7 @@
 using System.Collections.Specialized;
 using System.Windows.Input;
-using MvvmCross.iOS.Views;
 using Foundation;
+using MvvmCross.Platforms.Ios.Views;
 using UIKit;
 
 namespace SampleMvx.iOS
@@ -96,9 +96,9 @@ namespace SampleMvx.iOS
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
 
-        public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
+        public void Include(MvvmCross.IoC.MvxPropertyInjector injector)
         {
-            injector = new MvvmCross.Platform.IoC.MvxPropertyInjector();
+            injector = new MvvmCross.IoC.MvxPropertyInjector();
         }
 
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)
