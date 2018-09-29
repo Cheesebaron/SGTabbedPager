@@ -1,7 +1,5 @@
-using MvvmCross.Logging;
 using MvvmCross.Platforms.Ios.Core;
 using MvvmCross.ViewModels;
-using SampleMvx;
 
 namespace SampleMvx.iOS
 {
