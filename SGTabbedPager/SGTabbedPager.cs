@@ -8,8 +8,8 @@ using Foundation;
 using UIKit;
 
 #if __MVX__
-using MvvmCross.Core.ViewModels;
-using MvvmCross.iOS.Views;
+using MvvmCross.ViewModels;
+using MvvmCross.Platforms.Ios.Views;
 #endif
 
 namespace DK.Ostebaronen.Touch.SGTabbedPager
