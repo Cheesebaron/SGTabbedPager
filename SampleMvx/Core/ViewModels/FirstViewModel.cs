@@ -1,7 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
-using MvvmCross.Core.ViewModels;
+using MvvmCross.Commands;
+using MvvmCross.ViewModels;
 
 namespace SampleMvx.Core.ViewModels
 {

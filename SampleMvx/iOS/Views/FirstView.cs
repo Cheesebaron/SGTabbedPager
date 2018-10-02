@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using Cirrious.FluentLayouts.Touch;
 using DK.Ostebaronen.Touch.SGTabbedPager;
 using MvvmCross.Binding.BindingContext;
-using MvvmCross.iOS.Views;
+using MvvmCross.Platforms.Ios.Views;
 using ObjCRuntime;
 using SampleMvx.Core.ViewModels;
 using UIKit;
