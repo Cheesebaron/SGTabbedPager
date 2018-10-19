@@ -23,3 +23,7 @@
 - Added ability to add spacing between tabs ([#21](https://github.com/Cheesebaron/SGTabbedPager/pull/21)) ([BitKaitsu](https://github.com/BitKaitsu))
 - Built against MvvmCross 5.5.2
 - Built against Cirrious.FluentLayout 2.6.0
+
+### New in 1.6.0
+- Built against MvvmCross 6.2.0 ([#25](https://github.com/Cheesebaron/SGTabbedPager/pull/25)) ([MrBasque](https://github.com/MrBasque))
+- Built against Cirrious.FluentLayout 2.7.0 ([#25](https://github.com/Cheesebaron/SGTabbedPager/pull/25)) ([MrBasque](https://github.com/MrBasque))
