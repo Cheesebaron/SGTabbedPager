@@ -27,3 +27,6 @@
 ### New in 1.6.0
 - Built against MvvmCross 6.2.0 ([#25](https://github.com/Cheesebaron/SGTabbedPager/pull/25)) ([MrBasque](https://github.com/MrBasque))
 - Built against Cirrious.FluentLayout 2.7.0 ([#25](https://github.com/Cheesebaron/SGTabbedPager/pull/25)) ([MrBasque](https://github.com/MrBasque))
+
+### New in 1.6.1
+- Fixed bug with animation on tabs not working ([#22](https://github.com/Cheesebaron/SGTabbedPager/pull/22)) ([BitKaitsu](https://github.com/BitKaitsu))
