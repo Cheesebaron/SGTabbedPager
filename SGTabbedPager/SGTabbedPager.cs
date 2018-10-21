@@ -417,7 +417,7 @@ namespace DK.Ostebaronen.Touch.SGTabbedPager
                 ContentScrollView.Frame.Size.Width, ContentScrollView.Frame.Size.Height);
             if (frame.X >= ContentScrollView.ContentSize.Width) return;
 
-            _enableParallax = animated && !_staticTabBar;
+            _enableParallax = !animated && !_staticTabBar;
 
             if (!_staticTabBar)
             {
