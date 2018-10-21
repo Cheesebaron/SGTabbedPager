@@ -1,5 +1,4 @@
 #tool nuget:?package=GitVersion.CommandLine
-#tool nuget:?package=gitlink&version=2.4.0
 #tool nuget:?package=vswhere
 
 var sln = new FilePath("SGTabbedPager.sln");
@@ -73,18 +72,8 @@ Task("Build")
 	MSBuild(sln, settings);
 });
 
-Task("GitLink")
-	.WithCriteria(() => IsRunningOnWindows()) //pdbstr.exe and costura are not xplat currently
-	.Does(() => {
-	GitLink(sln.GetDirectory(), new GitLinkSettings {
-		ArgumentCustomization = args => args.Append("-ignore sample,samplemvx.core,samplemvx.ios"),
-		RepositoryUrl = "https://github.com/Cheesebaron/SGTabbedPager"
-	});
-});
-
 Task("Package")
 	.IsDependentOn("Build")
-	.IsDependentOn("GitLink")
 	.Does(() => {
 
 	EnsureDirectoryExists(outputDir);
@@ -130,7 +119,6 @@ Task("Package")
 
 Task("PackageMvx")
 	.IsDependentOn("Build")
-	.IsDependentOn("GitLink")
 	.Does(() => {
 
 	EnsureDirectoryExists(outputDir);
@@ -189,6 +177,7 @@ Task("UploadAppVeyorArtifact")
 	}
 });
 
-Task("Default").IsDependentOn("UploadAppVeyorArtifact").Does(() => {});
+Task("Default")
+	.IsDependentOn("UploadAppVeyorArtifact");
 
 RunTarget(target);
